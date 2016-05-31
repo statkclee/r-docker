@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: R 도커</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-59802572-17', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">R 도커</h1></a>
+          <h2 class="subtitle">팩키지 설치</h2>
+          <h2 id="rstudio-내부-r-팩키지-설치">RStudio 내부 R 팩키지 설치</h2>
+<p><code>install.packages</code> 명령어를 사용해서 데스크톱 RStudio 세션에서 작업했던 것과 동일한 방식으로 웹브라우져로 RStudio에서 R 팩키지를 설치할 수 있다. <code>hadleyverse</code> 도커 컨테이너를 실행해서 앞선 학습처럼 RStudio를 실행한다. 그리고 나서 <code>gapminder</code> 팩키지를 설치하고 라이브러리를 적재하고 포함된 데이터를 살짝 살펴본다.</p>
+<pre><code># install package
+install.packages(&#39;gapminder&#39;)
+
+# load library
+library(gapminder)
+
+# peak at data
+head(gapminder)</code></pre>
+<p>아주 훌륭하다! 이제 <code>gapminder</code> 팩키지를 설치했기 때문에 팩키지에 포함된 모든 데이터를 갖고 작업할 수 있게 되었다. 그런데, 여기서 잠깐. 컨테이너를 빠져나가면 어떻게 될까? 컨테이너가 삭제된다. 따라서 도커 이미지에 <code>gapminder</code> 팩키지가 설치된 버전을 저장하지 않았기 때문에, 컨테이너를 다시 올리게 되면, 다시 <code>gapminder</code> 팩키지를 설치해야 되는 상황이 발생된다.</p>
+<p>이런 문제를 회피하기 위해서, <code>docker commit</code> 명령어를 사용해서 이미지를 저장한다. 이런 경우 다음번 도커 컨테이너를 실행시키면 <code>gapminder</code> 팩키지가 포함된 이미지 인스턴스가 실행된다. 이렇게 작업을 실행하고자 하면, 도커 컨테이너를 닫기 <strong>전</strong>에 또다른 터미널 윈도우를 열고 추가 작업을 진행한다.</p>
+<p>특정 이미지 버젼을 저장하려면, 해당 컨테이너에 딸려있는 특정 해쉬값을 찾아야 된다. 새로 연 터미널 윈도우에 다음 명령어를 타이핑하게 되면 이런 정보를 확인하게 된다. <code>docker ps</code> 명령어를 통해 실행되고 있는 모든 도커 컨테이너를 볼 수 있게 된다:</p>
+<pre><code>docker ps</code></pre>
+<p>출력결과는 다음에 나온 것처럼 보이게 된다. 특정 컨테이너에 딸린 특정 해쉬값이 첫번째 칼럼에 알파벳과 숫자가 섞인 텍스트로 나타나게 된다.</p>
+<pre><code>f9ca71428352        rocker/hadleyverse   &quot;/init&quot;             6 seconds ago       Up 5 seconds        1410/tcp, 0.0.0.0:8787-&gt;8787/tcp   sick_bhabha</code></pre>
+<p>이제, 작업한 이미지를 저장하려면, 새로 연 터미널 윈도우에 다음과 같이 타이핑한다:</p>
+<pre><code>docker commit -m &quot;hadleyverse + gapminder&quot; f9ca71428352 hadleyverse_gapminder</code></pre>
+<p>도커 이미지를 저장하는데 이미지에 변경한 사항을 기술하는데 메시지를 추가해서 커밋한다. 커밋 메시지를 넘기는 방법은 <code>-m</code> 플래그 다음에 인용부호를 메시지에 감싸서 전달한다. 컨테이너에 대한 특정 해쉬값도 전달한다. (본 사례로 f9ca71428352) 마지막으로 신규 이미지에 대한 새로운 명칭을 부여한다. 새로 생성한 이미지에 <code>hadleyverse_gapminder</code> 라는 명칭을 부여했다.</p>
+<p><code>docker images</code> 명령어를 입력하면 로컬 컴퓨터에 도커 이미지가 두개 생성된 것이 확인된다.</p>
+<pre><code>docker images </code></pre>
+<pre><code>REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+hadleyverse_gapminder   latest              1cf34acb0d60        30 minutes ago      2.84 GB
+rocker/hadleyverse      latest              7cba8b06f25e        9 days ago          2.838 GB</code></pre>
+<p>작업한 결과가 예상한대로 돌아가는지 확인하려면 각 이미지에서 도커 컨테이너를 실행해서 확인한다. <code>gapminder</code> 팩키지가 <code>hadleyverse_gapminder</code> 이미지에만 설치되고, <code>rocker/hadleyverse</code> 이미지에는 설치가 되지 않은 것이 확인되면 모든 작업은 성공적으로 완료된 것이다.</p>
+<h3 id="r-시스템에-외부-의존성을-설치하는-경우">R 시스템에 외부 의존성을 설치하는 경우</h3>
+<p>GSL, GDAL, JAGS 등 다양한 외부 시스템에 R 팩키지가 의존성을 갖는 경우가 있다. <code>rocker/hadleyverse</code> 컨테이너에 이런 외부 시스템을 설치하려면, 도커 명령라인 인터페이스(새창으로 터미널을 연다)로 들어가서 다음 명령어를 타이핑한다:</p>
+<p><code>{r external-dependencies, eval=FALSE} docker ps # find the ID of the running container you want to add a package to docker exec -it &lt;container-id&gt; bash # a docker command to start a bash shell in your container apt-get install libgsl0-dev # install the package, in this case GSL</code></p>
+<p><code>apt-get install libgsl0-dev</code> 명령어를 실행할 때 오류 메시지가 뜨는 경우 <code>apt-get update</code> 명령어를 먼저 실행시킨다.</p>
+<p>외부 의존성을 설치한 변경내역을 저장하려면 또다른 터미널창으로 가서 <code>docker commit</code> 명령어를 사용해서 변경내역을 저장시킨다. 예를 들어,</p>
+<pre><code>docker commit -m &quot;hadleyverse + gapminder + GSL&quot; &lt;container id&gt;  hadleyverse_gapminder_gsl</code></pre>
+<p>이제, <code>docker exec</code> 명령어를 타이핑한 터미널 창으로 가서 <code>exit</code>를 입력하고 도커 컨테이너를 닫는다.</p>
+<p>다음 수업: <a href="04-Dockerhub.html">수업 04 도커허브(Dockerhub)</a>으로 진행하거나 <a href="index.html">학습목차</a>로 되돌아 간다.</p>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>
