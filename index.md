@@ -20,12 +20,12 @@ R과 RStudio 기반 지식이 있는 학습참여자를 위해 고안된 도커(
 
 ## 학습목차:
 
-1. [수업 01 도커는 무엇이고 왜 사용하나](01-what-and-why.html)
-1. [수업 02 도커 실행](02-Launching-Docker.html)
-1. [수업 03 팩키지 설치](03-install-packages.html) 
-1. [수업 04 도커허브(Dockerhub)](04-Dockerhub.html)
-1. [수업 05 도커파일(Dockerfiles)](05-dockerfiles.html)
-1. [수업 06 분석결과 공유](06-Sharing-all-your-analysis.html)
+1. [도커는 무엇이고 왜 사용하나](01-what-and-why.html)
+1. [도커 실행](02-Launching-Docker.html)
+1. [팩키지 설치](03-install-packages.html) 
+1. [도커허브(Dockerhub)](04-Dockerhub.html)
+1. [도커파일(Dockerfiles)](05-dockerfiles.html)
+1. [분석결과 공유](06-Sharing-all-your-analysis.html)
 
 ## 링크
 - [웹사이트](http://ropenscilabs.github.io/r-docker-tutorial)
