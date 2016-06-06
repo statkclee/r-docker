@@ -20,6 +20,7 @@ R과 RStudio 기반 지식이 있는 학습참여자를 위해 고안된 도커(
 
 ## 학습목차:
 
+1. [도커 설치](00-install.html)
 1. [도커는 무엇이고 왜 사용하나](01-what-and-why.html)
 1. [도커 실행](02-Launching-Docker.html)
 1. [팩키지 설치](03-install-packages.html) 

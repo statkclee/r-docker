@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: R 도커</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-59802572-17', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <a href="index.html"><h1 class="title">R 도커</h1></a>
+          <h2 class="subtitle">도커 설치</h2>
+          <section class="objectives panel panel-warning">
+<div class="panel-heading">
+<h2 id="학습목표"><span class="glyphicon glyphicon-certificate"></span>학습목표</h2>
+</div>
+<div class="panel-body">
+<ul>
+<li>도커를 설치한다.</li>
+<li>윈도우즈, 리눅스, 맥에 도커를 설치한다.</li>
+</ul>
+</div>
+</section>
+<h2 id="리눅스에서-도커-설치">리눅스에서 도커 설치</h2>
+<p>리눅스에서 도커를 설치하는 과정은 터미널을 열고 다음 명령어를 쭉 실행시키면 간단히 설치된다. <code>curl</code>이 설치되지 않은 경우 <code>curl</code>을 설치하고 도커를 설치하면 된다.</p>
+<pre class="shell"><code>$ which curl
+$ sudo apt-get update
+$ sudo apt-get install -y curl
+$ curl -fsSL https://get.docker.com/ | sh
+$ curl -fsSL https://get.docker.com/gpg | sudo apt-key add -
+$ docker run hello-world</code></pre>
+<h2 id="맥에-도커-설치">맥에 도커 설치</h2>
+<ol style="list-style-type: decimal">
+<li>애플 메뉴 좌측 최상단 애플 로고를 클릭하여 <code>이 Mac에 관하여</code> 를 클릭하여 OS X 10.8 “마운틴 라이언” 버젼이상이 되는 것을 확인한다.</li>
+<li><a href="https://www.docker.com/products/docker-toolbox">Docker Toolbox</a>로 가서 도커연장통(Docker Toolboxk)을 다운로드한다.</li>
+<li>다운로드한 팩키지를 두번 클릭하거나 우클릭하여 “Open from the pop-up menu”를 선택한다.</li>
+<li><code>install</code> 버튼을 클릭하여 설치를 진행한다.</li>
+<li>설치가 완료되면, <code>LaunchPad</code>에서 <code>Docker Quickstart Terminal</code> 아이콘을 확인하고 연다.</li>
+</ol>
+<pre class="output"><code>                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+
+
+docker is configured to use the default machine with IP 192.178.99.100
+For help getting started, check out the docs at https://docs.docker.com
+
+$ docker run hello-world</code></pre>
+<p>상기와 같은 화면이 나오면 모든 설치가 완료된 것이다. 특히 <code>192.178.99.100</code> IP주소는 RStudio를 사용할 때 유용하게 활용되니 필히 기억해 둔다. <code>docker run hello-world</code> 명령어를 처음 실행하면 도커허브에서 <code>hello-world</code> 이미지를 받아온다. 이제 맥에서 도커를 사용할 준비가 모두 끝났다.</p>
+<h2 id="윈도우즈-도커-설치">윈도우즈 도커 설치</h2>
+<p>윈도우에서 도커를 설치하는데 여러가지 조건이 사전에 만족되어야 한다.</p>
+<ol style="list-style-type: decimal">
+<li>64비트 운영체제이며, 윈도우 7이상 이어야한다.
+<ul>
+<li>제어판 → 시스템과 보안 → 시스템 으로 들어가서 윈도우 버젼을 확인한다.</li>
+</ul></li>
+<li>가상화가 지원되는지 확인한다.
+<ul>
+<li>시작 → 작업관리자 → <code>성능</code> 탭으로 가서 <strong>가상화</strong> 가 활성화되었는지 확인한다.</li>
+</ul></li>
+<li><a href="https://www.docker.com/products/docker-toolbox">Docker Toolbox</a>로 가서 도커연장통(Docker Toolboxk)을 다운로드한다.</li>
+<li>다운로드한 팩키지를 두번 클릭하거나 우클릭하여 “Open from the pop-up menu”를 선택한다.</li>
+<li><code>install</code> 버튼을 클릭하여 설치를 진행한다.</li>
+</ol>
+<p>만약 가상상자(VirtualBox)가 미리 돌고 있는 경우 반드시 정지시키고 설치작업을 진행시킨다.</p>
+<p>나머지 과정은 맥과 동일하다.</p>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>
