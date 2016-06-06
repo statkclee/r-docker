@@ -24,6 +24,59 @@ $ curl -fsSL https://get.docker.com/gpg | sudo apt-key add -
 $ docker run hello-world
 ~~~
 
+> ### `docker - Cannot connect to the Docker daemon. Is the docker daemon running on this host?.` 오류 [^docker-ubuntu-error] {.callout}
+> 
+>  `docker run hello-world` 실행 오류가 발생하면 다음과정을 거쳐 오류를 해결한다.
+> 
+> 1. 루트 권한으로 사용자를 바꾼다.
+> 1. 도커 서비스를 시작한다.
+> 1. `docker images` 명령어가 제대로 먹히면 다음으로 넘어간다.
+> 1. `docker` 사용자 그룹에 `parallels` 혹은 `vagrant` 등 루트권한을 갖는 사용자명을 추가한다.
+> 
+> ~~~ {.shell}
+> $ sudo su -
+> $ service docker start
+> $ docker images
+> 
+> $ sudo usermod -aG docker parallels
+> ~~~
+
+[^docker-ubuntu-error]: [Faied to connect to the Docker daemon #17645](https://github.com/docker/docker/issues/17645)
+
+`hello-world` 이미지가 없기 때문에 도커허브에서 다운로드 받아오고 나서 다음과 같은 메시지가 출력되면 정상적인 설치가 완료된 것이다.
+
+~~~ {.output}
+parallels@ubuntu:~$ docker run hello-world
+
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+4276590986f6: Pull complete 
+a3ed95caeb02: Pull complete 
+Digest: sha256:a7d7a8c072a36adb60f5dc932dd5caba8831ab53cbf016bcdd6772b3fbe8c362
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+~~~
+
 ## 맥에 도커 설치
 
 1. 애플 메뉴 좌측 최상단 애플 로고를 클릭하여 `이 Mac에 관하여` 를 클릭하여 OS X 10.8 "마운틴 라이언" 버젼이상이 되는 것을 확인한다.

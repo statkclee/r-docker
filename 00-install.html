@@ -58,6 +58,55 @@ $ sudo apt-get install -y curl
 $ curl -fsSL https://get.docker.com/ | sh
 $ curl -fsSL https://get.docker.com/gpg | sudo apt-key add -
 $ docker run hello-world</code></pre>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h3 id="docker---cannot-connect-to-the-docker-daemon.-is-the-docker-daemon-running-on-this-host.-오류-docker-ubuntu-error"><span class="glyphicon glyphicon-pushpin"></span><code>docker - Cannot connect to the Docker daemon. Is the docker daemon running on this host?.</code> 오류 <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></h3>
+</div>
+<div class="panel-body">
+<p><code>docker run hello-world</code> 실행 오류가 발생하면 다음과정을 거쳐 오류를 해결한다.</p>
+<ol style="list-style-type: decimal">
+<li>루트 권한으로 사용자를 바꾼다.</li>
+<li>도커 서비스를 시작한다.</li>
+<li><code>docker images</code> 명령어가 제대로 먹히면 다음으로 넘어간다.</li>
+<li><code>docker</code> 사용자 그룹에 <code>parallels</code> 혹은 <code>vagrant</code> 등 루트권한을 갖는 사용자명을 추가한다.</li>
+</ol>
+<pre class="shell"><code>$ sudo su -
+$ service docker start
+$ docker images
+
+$ sudo usermod -aG docker parallels</code></pre>
+</div>
+</aside>
+<p><code>hello-world</code> 이미지가 없기 때문에 도커허브에서 다운로드 받아오고 나서 다음과 같은 메시지가 출력되면 정상적인 설치가 완료된 것이다.</p>
+<pre class="output"><code>parallels@ubuntu:~$ docker run hello-world
+
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+4276590986f6: Pull complete 
+a3ed95caeb02: Pull complete 
+Digest: sha256:a7d7a8c072a36adb60f5dc932dd5caba8831ab53cbf016bcdd6772b3fbe8c362
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/</code></pre>
 <h2 id="맥에-도커-설치">맥에 도커 설치</h2>
 <ol style="list-style-type: decimal">
 <li>애플 메뉴 좌측 최상단 애플 로고를 클릭하여 <code>이 Mac에 관하여</code> 를 클릭하여 OS X 10.8 “마운틴 라이언” 버젼이상이 되는 것을 확인한다.</li>
@@ -98,6 +147,12 @@ $ docker run hello-world</code></pre>
 </ol>
 <p>만약 가상상자(VirtualBox)가 미리 돌고 있는 경우 반드시 정지시키고 설치작업을 진행시킨다.</p>
 <p>나머지 과정은 맥과 동일하다.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://github.com/docker/docker/issues/17645">Faied to connect to the Docker daemon #17645</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
         </div>
       </div>
       </article>
