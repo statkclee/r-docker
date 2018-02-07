@@ -89,3 +89,30 @@ mainfont: NanumGothic
 1. **Shiny 웹 배포**를 위해서 로컬 컴퓨터에서 개발한 Shiny 웹앱을 `docker cp` 명령어를 통해 `docker run`을 통해 생성된 `stupefied_swirles` 콘테이너 `/srv/shiny-server/` 디렉토리에 앞서 정의한 호스트 로컬 컴퓨터
 디렉토리 `C:\shiny` 모든 파일을 복사하여 배포시킨다.
     - 예를 들어, docker cp . stupefied_swirles:/srv/shiny-server/
+
+### 3.3. Shiny 앱 배포 {#docker-rstudio-shiny-deploy}
+
+`rocker/rstudio`, `rocker/shiny` 도커 이미지 기반에 추가로 필요한 팩키지를 설치하고 나서, 개발된 Shiny 앱을 얻어 이를 이미지로 구워서 도커를 통해 배포한다.
+
+``` {r docker-deployment-dockerfile, eval=FALSE}
+# rocker/shiny 기반 이미지 가져오기
+FROM rocker/shiny
+ 
+# Shiny 앱에 필요한 팩키지 설치
+RUN R -e "install.packages(c('shiny', 'rmarkdown'), repos='http://cran.rstudio.com/')"
+ 
+# 개발된 Shiny 앱을 배포하기 전에 사전 정지작업
+RUN rm -rf /srv/shiny-server/*
+ 
+# 개발된 Shiny 앱을 배포
+COPY * /srv/shiny-server/
+ 
+# 서버를 구동시킨다.
+CMD ["/usr/bin/shiny-server.sh"]
+```
+
+`Dockerfile`에 기반 도커 이미지를 정의하고 R 웹앱개발에 필요한 팩키지를 설치하고 샤이니 R코드로 작성한 것을 콘테이너에 담아 어떤 환경에서도 
+실행될 수 있도록 한다.
+
+<img src="fig/r-shiny-app-deployment.png" alt="샤이니 앱 배포" width="57%" />
+
