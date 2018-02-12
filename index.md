@@ -17,6 +17,7 @@ R과 RStudio 기반 지식이 있는 학습참여자를 위해 고안된 도커(
 > ### R 도커 원본 정보 {.callout}
 > 
 > 본 R 도커 학습교재는 [R Docker tutorial](http://ropenscilabs.github.io/r-docker-tutorial/)을 번역한 것입니다. R을 도커와 연계하여 설명한 학습교재 중의 하나로 아직 100% 완벽하지는 않지만, R 개발자가 도커를 활용하여 과학컴퓨팅을 통한 연구활동을 하는데 필요한 기본적인 지식과 경험이 충분히 녹여져 있습니다.
+> [R Docker tutorial](http://ropenscilabs.github.io/r-docker-tutorial/) 내용에 더해서 추가적으로 도커 활용에 도움이 될 수 있는 그림을 몇개 더 추가하였다.
 
 ## 학습목차:
 
@@ -25,7 +26,7 @@ R과 RStudio 기반 지식이 있는 학습참여자를 위해 고안된 도커(
 1. [도커 실행](02-Launching-Docker.html)
 1. [도커 이미지 생성 - 팩키지 설치 포함](03-install-packages.html) 
 1. [도커허브(Dockerhub)](04-Dockerhub.html)
-1. [도커파일(Dockerfiles)](05-dockerfiles.html)
+1. [배포 - 도커파일(Dockerfiles)](05-dockerfiles.html)
 1. [분석결과 공유](06-Sharing-all-your-analysis.html)
 
 ## 링크
