@@ -6,7 +6,7 @@ output:
   html_document: 
     toc: yes
     highlight: tango
-    code_folding: hide
+    code_folding: show
 mainfont: NanumGothic
 ---
 
@@ -14,7 +14,7 @@ mainfont: NanumGothic
 > ## 학습목표
 > - 도커 컨테이너 내부에서 RStudio 실행
 > - 도커 컨테이너에 볼륨 연결
-> - Load into the container plotting it
+> - 콘테이너에 데이터 적재시켜 그래프 작성
 
 ## 1. 설치 {#docker-install}
 

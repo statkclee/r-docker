@@ -6,7 +6,7 @@ output:
   html_document: 
     toc: yes
     highlight: tango
-    code_folding: hide
+    code_folding: show
 mainfont: NanumGothic
 ---
 

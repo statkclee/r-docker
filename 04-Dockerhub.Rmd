@@ -6,7 +6,7 @@ output:
   html_document: 
     toc: yes
     highlight: tango
-    code_folding: hide
+    code_folding: show
 mainfont: NanumGothic
 ---
 
@@ -120,7 +120,7 @@ $ docker save verse_gapminder > verse_gapminder.tar
 $ docker load --input verse_gapminder.tar
 ```
 
-## 4. 도전과제 {#r-docker-challenge}
+## 4. 도전과제 {#r-docker-dockerhub-challenge}
 
 - 동료가 제작한 이미지를 다운로드 받아본다. 첫음 `verse` 이미지를 다운로드 받을 때와 속도를 비교해보면 어떤가?
 - [도커허브(Docker Hub)](https://hub.docker.com/)에서 재밌을 듯 한 이미지를 살펴본다. 본인에게 도커 이미지가 어떤 점에서 유익할 수 있을지 생각해본다.
