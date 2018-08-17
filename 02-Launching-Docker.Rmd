@@ -2,12 +2,15 @@
 layout: page
 title: R 도커
 subtitle: 도커에서 RStudio 실행
+date: "`r Sys.Date()`"
 output:
   html_document: 
     toc: yes
+    toc_float: true
     highlight: tango
     code_folding: show
-mainfont: NanumGothic
+    number_section: true
+    self_contained: true
 ---
 
 
@@ -16,12 +19,12 @@ mainfont: NanumGothic
 > - 도커 컨테이너에 볼륨 연결
 > - 콘테이너에 데이터 적재시켜 그래프 작성
 
-## 1. 설치 {#docker-install}
+# 설치 {#docker-install}
 
 가장 먼저 해야할 작업: **도커 설치**: [리눅스](https://docs.docker.com/linux/step_one/), [맥](https://docs.docker.com/mac/step_one/),  [윈도우즈](https://docs.docker.com/windows/step_one/). 
 설치가 완료된 후에 설치안내서에 도커소개학습교재에 대한 링크가 걸려있다; 이번 학습에 도커소개 학습교재를 필히 학습할 필요는 없지만, 기본적인 도커 사용법에 대한 훌륭한 지침서이기는 하다.
 
-## 2. 도커에서 RStudio 실행 {#docker-launch-rstudio}
+# 도커에서 RStudio 실행 {#docker-launch-rstudio}
 
 도커를 실행하는데 가장 먼저 필요한 선행작업은 유닉스 쉘을 여는 것에서 시작된다. 
 맥 혹은 윈도우를 운영체제 환경이라면, *Docker Quickstart Terminal* 이라는 것이 설치단계에서 최종이다; 
@@ -117,7 +120,7 @@ plot(x, y)
 이제 이전에 수행했던 것처럼 RStudio 이미지를 사용해서 도커 컨테이너를 다시 재실행시킨다. 예를 들어, 터미널에서 `docker run --rm -p 8787:8787 rocker/hadleyverse`를 입력하고 나서, 웹브라우져 주소창에 `http://192.168.99.100:8787`을 실행하고 나면 RStudio 환영창이 열리고 ID, PW를 넣어 입력하고 나서 방금전에 저장한 R스크립트가 여전히 존재하는지 확인한다.
 
 
-## 3. 데이터에 접근하고 파일을 저장하기 위해 도커 컨테이너를 볼륨에 연결 {#docker-volume-link}
+# 데이터에 접근하고 파일을 저장하기 위해 도커 컨테이너를 볼륨에 연결 {#docker-volume-link}
 
 위와 같은 상황은... 컨테이너를 빠져나올 때 컨테이너가 삭제되면 작업할 결과를 어떻게 저장 혹은 살릴 수 있을까? 라는 문제와 직결된다.
 해결책 한개를 소개하면 볼륨(예를 들어, 로컬 하드디스크)에 컨테이너를 연결시켜서 그곳을 통해 데이터에 접근할 뿐만 아니라 그곳에 작업 결과를 저장하는 것이다.
@@ -155,7 +158,7 @@ ggsave(filename = 'data/GDP_LifeExp.pdf')
 `r-docker-tutorial` 디렉토리에 `plot_GDP_LifeExp.R` 파일명으로 스크립트를 저장한다. RStudio가 열린 브라우져를 닫고, 터미널에서  `Control+C` 키를 눌러 도커 컨테이너를 빠져나온다.
 그리고 나서 로컬 컴퓨터에서 `r-docker-tutorial` 와 `r-docker-tutorial/data` 디렉토리 내부를 살펴보면 파일 두개가 생성된 것을 확인하게 된다.
 
-## 4. 요약정리 {#docker-launch-summary}
+# 요약정리 {#docker-launch-summary}
 
 이번 학습에서 도커 컨테이너를 실행해서 브라우져로 RStudio를 실행하는 방법을 학습했다. 
 `--rm` 플래그를 사용해서 도커가 컨테이너를 하루살이처럼 일시적으로 만드는 방법도 학습했다; 컨테이너를 닫으면 자동으로 삭제되도록 하는 방법.
@@ -166,7 +169,7 @@ ggsave(filename = 'data/GDP_LifeExp.pdf')
 방금전에 사용한 컨테이너에는 R, RStudio, 유용한 R 팩키지가 사전에 설치되어 있다. 
 다음 학습에서 신규 팩키지를 설치해서 컨테이너를 변경시키는 방법을 학습하고, 진행되는 프로젝트에 유용한 도커 컨테이너를 찾아내는 방법도 학습할 것이다.
 
-## 5. 도전 과제 {#docker-launch-challenge}
+# 도전 과제 {#docker-launch-challenge}
 
 로컬 컴퓨터에 설치된 R 혹은 RStudio를 실행해서 `installed.packages()` 명령어를 통해 설치된 팩키지를 확인한다.
 주변 동료와 설치된 팩키지가 매칭되는지 점검한다. 

@@ -2,16 +2,19 @@
 layout: page
 title: R 도커
 subtitle: 도커 설치
+date: "`r Sys.Date()`"
 output:
   html_document: 
     toc: yes
+    toc_float: true
     highlight: tango
     code_folding: show
-mainfont: NanumGothic
+    number_section: true
+    self_contained: true
 ---
 
 
-## 1. 리눅스에서 도커 설치 {#docker-linux}
+# 리눅스에서 도커 설치 {#docker-linux}
 
 리눅스에서 도커를 설치하는 과정은 터미널을 열고 다음 명령어를 쭉 실행시키면 간단히 설치된다.
 `curl`이 설치되지 않은 경우 `curl`을 설치하고 도커를 설치하면 된다.
@@ -78,7 +81,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 ```
 
-## 2. 맥에 도커 설치 {#docker-mac}
+# 맥에 도커 설치 {#docker-mac}
 
 1. 애플 메뉴 좌측 최상단 애플 로고를 클릭하여 `이 Mac에 관하여` 를 클릭하여 OS X 10.8 "마운틴 라이언" 버젼이상이 되는 것을 확인한다.
 1. [Docker Toolbox](https://www.docker.com/products/docker-toolbox)로 가서 도커연장통(Docker Toolboxk)을 다운로드한다.
@@ -107,7 +110,7 @@ $ docker run hello-world
 `docker run hello-world` 명령어를 처음 실행하면 도커허브에서 `hello-world` 이미지를 받아온다. 이제 맥에서 도커를 사용할 준비가 모두 끝났다.
 
 
-## 3. 윈도우즈 도커 설치 {#docker-windows}
+# 윈도우즈 도커 설치 {#docker-windows}
 
 윈도우에서 도커를 설치하는데 여러가지 조건이 사전에 만족되어야 한다.
 

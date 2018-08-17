@@ -2,15 +2,18 @@
 layout: page
 title: R 도커
 subtitle: 도커파일(Dockerfiles)
+date: "`r Sys.Date()`"
 output:
   html_document: 
     toc: yes
+    toc_float: true
     highlight: tango
     code_folding: show
-mainfont: NanumGothic
+    number_section: true
+    self_contained: true
 ---
 
-## 단계적으로 도커파일 만들기 {#dockerfile-build-step}
+# 단계적으로 도커파일 만들기 {#dockerfile-build-step}
 
 앞서, 도커허브에서 RStudio를 포함하고 있는 기본 이미지로 학습을 시작했다.
 다음으로 컨테이너에 더 많은 것을 추가해서 넣고자 한다.
@@ -72,7 +75,7 @@ gapminder
 
 그리고 나면 `gapminder`가 이미 설치되어 있어 신규 도커 이미지로 바로 사용할 준비가 마친것을 확인할 수 있다.
 
-> ## 콘테이너 제거 
+> **콘테이너 제거** 
 > 
 > 다음 명령어 하나로 실행되고 있는 모든 컨테이너를 멈추고 제거한다:
 > 
@@ -107,7 +110,7 @@ docker run --rm -p 8787:8787 my-r-image
 RStudio에서 파일이 보이게 된다. 이런 방식으로 파일을 도커 이미지의 일부로 잡아 넣을 수 있다.
 따라서, 파일이 항상 정확하게 동일한 상태로 이미지의 일부로 언제나 이용가능하게 된다.
 
-> ### 캐쉬 계층(Cached Layers)
+> **캐쉬 계층(Cached Layers)**
 > 
 > 이번 학습에서 도커 이미지를 생성하고 재생성할 때, 다음과 같은 행이 출력되는 것을 목도했을 것이다:
 > 
@@ -126,7 +129,7 @@ RStudio에서 파일이 보이게 된다. 이런 방식으로 파일을 도커 �
 > 재사용할하는 똑똑한 기능을 갖추고 있다. 따라서, 설정단계 일부를 해결하자마자(특히, 속도가 나지 않는 부분이면)
 > 도커파일 상단에 위치시키고 해당 줄 사이 혹은 상단에 어떤것도 놓지 말라. 특히 자주 변경되는 것을 위치시키지 않는 것이 좋다; 이런 방식으로 빌드 생성과정에 상당한 속도향상을 기대할 수 있다.
 
-## 도커파일 {#dockerfile-one-file}
+# 도커파일 {#dockerfile-one-file}
 
 지금까지 작업한 도커파일을 하나로 요약하면 다음과 같다.
 
@@ -141,7 +144,7 @@ RUN R CMD INSTALL gapminder_0.3.0.tar.gz
 ADD data/gapminder-FiveYearData.csv /home/rstudio/
 ```
 
-## 요약  {#dockerfile-summary}
+# 요약  {#dockerfile-summary}
 
 도커파일(Dockerfile)을 구성하는 방법을 학습해서 원하는 도커 이미지를 재생성할 수 있게 되었다. 학습한 도커파일을 구성하는 주요 명령어는 다음과 같다.
 
@@ -151,7 +154,7 @@ ADD data/gapminder-FiveYearData.csv /home/rstudio/
 
 `docker build -t my-r-image .` 명령어를 통해 이미지가 생성되는데 `Dockerfile`과 `ADD` 명령어로 추가시킬 파일이 동일한 디렉토리에 위치시켜야 하는 조건만 만족시키면 된다.
 
-## 도전과제 {#dockerfile-challenge}
+# 도전과제 {#dockerfile-challenge}
 
 - 3번째 학습에서 생성시킨 이미지를 생성하게 하는 `Dockerfile`을 작성하시오: `rocker/verse` 기반 이미지 위에 `gapminder` 팩키지와 `gsl` 소프트웨어를 설치.
 이미지에 어떤 것이 담겨있는지 기술하는 `README` 파일도 추가하시오.

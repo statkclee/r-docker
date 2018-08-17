@@ -2,12 +2,15 @@
 layout: page
 title: R 도커
 subtitle: 분석결과 공유
+date: "`r Sys.Date()`"
 output:
   html_document: 
     toc: yes
+    toc_float: true
     highlight: tango
     code_folding: show
-mainfont: NanumGothic
+    number_section: true
+    self_contained: true
 ---
 
 

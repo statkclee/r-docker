@@ -2,12 +2,15 @@
 layout: page
 title: R 도커
 subtitle: 도커허브에 푸쉬해서 밀어 넣고, 풀해서 가져오기
+date: "`r Sys.Date()`"
 output:
   html_document: 
     toc: yes
+    toc_float: true
     highlight: tango
     code_folding: show
-mainfont: NanumGothic
+    number_section: true
+    self_contained: true
 ---
 
 
@@ -18,7 +21,7 @@ mainfont: NanumGothic
 > - 도커허브로 도커 이미지를 푸쉬해서 밀어넣는다.
 
 
-## 1. 도커허브에서 이미지를 가져온다. {#r-docker-pull}
+# 도커허브에서 이미지를 가져온다. {#r-docker-pull}
 
 [도커허브(Docker Hub)](https://hub.docker.com/)는 공개된 도커 이미지가 저장된 장소다.
 다음과 같이 명령어를 입력해서 첫 이미지를 실행하면,
@@ -36,7 +39,7 @@ $ docker run --rm -p 8787:8787 rocker/verse
 $ docker pull rocker/verse
 ```
 
-## 2. 도커허브에 이미지 넣기 {#r-docker-push-from-hub}
+# 도커허브에 이미지 넣기 {#r-docker-push-from-hub}
 
 본인이 직접 도커 이미지를 생성했다고 가정하자. 
 도커 이미지를 전세계 사람들과 공유하고자 한다고 가정하면, 
@@ -97,7 +100,7 @@ $ docker push yourhubusername/hadleyverse_gapminder
 
 이미지가 이제 누구나 사용할 수 있게 공개되었다.
 
-## 3. 도커 이미지를 로컬 파일로 저장하고 불러오기 {#r-docker-save-and-load}
+# 도커 이미지를 로컬 파일로 저장하고 불러오기 {#r-docker-save-and-load}
 
 [도커허브(Docker Hub)](https://hub.docker.com/)에 푸쉬해서 이미지를 공유하는 것도 좋은 방법이지만 몇가지 단점도 있는 것이 사실이다.
 
@@ -120,7 +123,7 @@ $ docker save verse_gapminder > verse_gapminder.tar
 $ docker load --input verse_gapminder.tar
 ```
 
-## 4. 도전과제 {#r-docker-dockerhub-challenge}
+# 도전과제 {#r-docker-dockerhub-challenge}
 
 - 동료가 제작한 이미지를 다운로드 받아본다. 첫음 `verse` 이미지를 다운로드 받을 때와 속도를 비교해보면 어떤가?
 - [도커허브(Docker Hub)](https://hub.docker.com/)에서 재밌을 듯 한 이미지를 살펴본다. 본인에게 도커 이미지가 어떤 점에서 유익할 수 있을지 생각해본다.
