@@ -1,11 +1,6 @@
-README.html
-LAYOUT.html
-FAQ.html
-DESIGN.html
-CONTRIBUTING.html
-CONDUCT.html
-*~
-*.pyc
-_site
-.DS_Store
-.ipynb_*
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/

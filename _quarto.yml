@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!materials/workshop/"
+  preview:
+    port: 1357
+    browser: true
+
+website:
+  title: "통계 패키지"
+  page-navigation: true
+  navbar:
+    background: "#447099"
+    left:
+      - href: index.qmd
+        text: "홈"
+      - text: "교재"
+        menu:
+        - text: "디지털 글쓰기-공용"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+execute:
+  freeze: true
+
